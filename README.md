@@ -1,9 +1,14 @@
-from functools import lru_cache
+n = int(input())
 
-@lru_cache(None)
-def f(n):
-    if n <= 13:
-        return 1
-    return 2 * (n - 3) * f(n - 2)
+dp = [0] * (n + 1)
+dp[n] = 1
 
-print(f(int(input())))
+for nuts in range(n, 0, -1):
+    if nuts % 9 == 0:
+        continue
+
+    ways = dp[nuts]
+    if ways == 0:
+        continue
+
+    dp[nuts - 1] += ways
